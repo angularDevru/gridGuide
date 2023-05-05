@@ -7,6 +7,7 @@ import { ChannelsStyled } from "../styles";
 
 // Import Components
 import { Channel } from "../components";
+import { View } from "react-native";
 
 interface ChannelsProps {
   isTimeline: boolean;
@@ -39,14 +40,22 @@ export function Channels(props: ChannelsProps) {
   };
 
   return (
-    <Box
+    <View
       data-testid="sidebar"
-      isRTL={isRTL}
-      isTimeline={isTimeline}
-      width={sidebarWidth}
-      bottom={scrollY}
+      style={{
+        position: "absolute",
+        width: sidebarWidth,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        alignItems: "center",
+        bottom: scrollY,
+        left: 0,
+        top: 60,
+        backgroundColor: "#171923"
+      }}
     >
       {channels.map(renderChannels)}
-    </Box>
+    </View>
   );
 }

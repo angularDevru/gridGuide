@@ -168,10 +168,19 @@ export const getItemVisibility = (
   position: Position,
   scrollY: number,
   scrollX: number,
-  containerHeight: number,
-  containerWidth: number,
+  containerHeight: number = 1000,
+  containerWidth: number = 1000,
   itemOverscan: number
 ) => {
+
+  console.log("position", position);
+  console.log("scrollY", scrollY);
+  console.log("scrollX", scrollX);
+  console.log("containerHeight", containerHeight);
+  console.log("itemOverscan", itemOverscan);
+
+
+
   if (position.width <= 0) {
     return false;
   }

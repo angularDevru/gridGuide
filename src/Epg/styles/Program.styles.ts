@@ -47,7 +47,7 @@ const Elipsis = `
   text-overflow: ellipsis;
 `;
 
-export const ProgramTitle = styled.View<{ theme?: Theme }>`
+export const ProgramTitle = styled.Text<{ theme?: Theme }>`
   font-size: 14px;
   text-align: left;
   margin-top: 0;

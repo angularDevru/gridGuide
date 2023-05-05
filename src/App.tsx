@@ -68,28 +68,20 @@ const App: () => any = () => {
   const { isLoading, getEpgProps, getLayoutProps } = useApp();
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <View style={{ height: 600, width: 1200 }}>
-          <Epg {...getEpgProps()}>
-            <Layout
-              {...getLayoutProps()}
-            />
-          </Epg>
-          <Text
-            style={[
-              styles.sectionTitle,
-              {
-                color: isDarkMode ? Colors.white : Colors.black,
-              },
-            ]}>
-            {"maha"}
-          </Text>
-        </View>
-      </ScrollView>
+    <SafeAreaView>
+      {/* <ScrollView
+        contentInsetAdjustmentBehavior="always"
+        horizontal={true}
+        style={{ ...backgroundStyle, marginHorizontal: 20, overflow: "scroll" }}> */}
+      <View style={{ height: 1000, width: 5000, backgroundColor: "green" }}>
+        <Epg {...getEpgProps()}>
+          <Layout
+            {...getLayoutProps()}
+          />
+        </Epg>
+
+      </View>
+      {/* </ScrollView> */}
     </SafeAreaView>
   );
 };

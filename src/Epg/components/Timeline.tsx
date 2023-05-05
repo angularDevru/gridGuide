@@ -8,7 +8,11 @@ import { TimelineStyled } from "../styles";
 
 // Import hooks
 import { useTimeline } from "../hooks";
+import {
 
+  Text, View
+} from 'react-native';
+import { ITEM_HEIGHT } from "../helpers";
 const {
   TimelineWrapper,
   TimelineBox,
@@ -56,28 +60,53 @@ export function Timeline({
 
 
 
-  const renderTime = (index: number) => (
-    <TimelineBox data-testid="timeline-item" key={index} width={hourWidth}>
-      <TimelineTime isBaseTimeFormat={isBaseTimeFormat} isRTL={isRTL}>
-        {formatTime(index + offsetStartHoursRange)}
-      </TimelineTime>
-      <TimelineDividers>{renderDividers()}</TimelineDividers>
-    </TimelineBox>
-  );
+  const renderTime = (index: number) => {
+    console.log(formatTime(index + offsetStartHoursRange));
+
+
+    return (
+      <View data-testid="timeline-item" key={index} style={{
+        width: hourWidth,
+        position: "relative"
+      }}>
+        {/* <Text >{formatTime(index + offsetStartHoursRange)}</Text> */}
+        <Text
+          style={{
+            color: "grey",
+            fontSize: 14,
+            top: 18
+          }}
+        >
+          {formatTime(index + offsetStartHoursRange)}
+        </Text>
+        <TimelineDividers>{renderDividers()}</TimelineDividers>
+      </View>
+    )
+  };
 
   const renderDividers = () =>
     dividers.map((_, index) => (
       <TimelineDivider key={index} width={hourWidth} />
     ));
 
+  console.log("time", time);
+
   return (
-    <TimelineWrapper
+    <View
       data-testid="timeline"
-      dayWidth={dayWidth}
-      sidebarWidth={sidebarWidth}
-      isSidebar={isSidebar}
+      style={{
+        top: 0,
+        left: sidebarWidth,
+        display: "flex",
+        height: ITEM_HEIGHT - 20,
+        width: dayWidth,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        backgroundColor: "#171923"
+      }}
     >
       {time.map((_, index) => renderTime(index))}
-    </TimelineWrapper>
+    </View>
   );
 }

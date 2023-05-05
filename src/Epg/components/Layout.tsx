@@ -18,7 +18,7 @@ import { EpgStyled } from "../styles";
 
 // Import components
 import { Timeline, Channels, Program, Line } from "../components";
-import { ScrollView } from "react-native";
+import { ScrollView, View } from "react-native";
 
 interface RenderTimeline {
   isBaseTimeFormat: BaseTimeFormat;
@@ -95,7 +95,10 @@ export const Layout = React.forwardRef<any, LayoutProps>(
 
     const renderPrograms = (program: ProgramWithPosition) => {
       const { position } = program;
-      const isVisible = isProgramVisible(position);
+      // const isVisible = isProgramVisible(position);
+      const isVisible = true;
+
+      console.log("isVisible", isVisible);
 
       if (isVisible) {
         const options = getProgramOptions(program);
@@ -140,7 +143,12 @@ export const Layout = React.forwardRef<any, LayoutProps>(
     };
 
     return (
-      <ScrollView ref={scrollBoxRef} onScroll={onScroll as any}>
+      <ScrollView
+        ref={scrollBoxRef}
+        onScroll={onScroll as any}
+        horizontal={false}
+      // contentContainerStyle={{ height: 10000 }}
+      >
         {(
           <Line
             dayWidth={dayWidth}
@@ -163,17 +171,21 @@ export const Layout = React.forwardRef<any, LayoutProps>(
             renderChannel={renderChannel}
           />
         )}
-        {/* <Content
+        <View
           data-testid="content"
-          sidebarWidth={sidebarWidth}
-          isSidebar={isSidebar}
-          width={dayWidth}
-          height={contentHeight}
+          style={{
+            backgroundColor: "#171923",
+            height: contentHeight,
+            width: dayWidth,
+            position: "absolute",
+            left: sidebarWidth,
+            top: 60
+          }}
         >
           {programs.map((program) =>
             renderPrograms(program as ProgramWithPosition)
           )}
-        </Content> */}
+        </View>
       </ScrollView>
     );
   }

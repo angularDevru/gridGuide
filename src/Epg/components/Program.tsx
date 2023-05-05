@@ -12,6 +12,7 @@ import { ProgramStyled } from "../styles";
 
 // Import hooks
 import { useProgram } from "../hooks";
+import { View, Text } from "react-native";
 
 interface ProgramProps<T> {
   isRTL?: boolean;
@@ -64,28 +65,55 @@ export function Program<T extends ProgramItem>({
   ).toLowerCase();
 
   return (
-    <ProgramBox
+    <View
       data-testid="program-item"
-      width={styles.width}
-      style={styles.position}
+      style={{
+        ...styles.position,
+        ...{
+          position: "absolute",
+          padding: 4,
+          overflow: "hidden"
+        }
+      }}
     >
-      <ProgramContent
+      <View
         data-testid="program-content"
-        width={styles.width}
-        isLive={isLive}
-        onClick={handleOnContentClick}
         {...rest}
+        style={{
+          position: "relative",
+          display: "flex",
+          height: "100%",
+          borderRadius: 8,
+          padding: 10,
+          overflow: "hidden",
+          backgroundColor: "#1a202c",
+        }}
       >
-        <ProgramFlex>
-          {isLive && isMinWidth && <ProgramImage src={image} alt="Preview" />}
-          <ProgramStack isRTL={isRTL}>
-            <ProgramTitle>{title}</ProgramTitle>
-            <ProgramText aria-label="program time">
+        <View
+          style={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "flex-start",
+            backgroundColor: "#1a202c",
+
+          }}
+
+        >
+          <View>
+            <Text style={{
+              fontSize: 14,
+              textAlign: "left",
+              marginTop: 0,
+              marginBottom: 5,
+              fontWeight: "500",
+              color: "white"
+            }}>{title}</Text>
+            {/* <ProgramText aria-label="program time">
               {sinceTime} - {tillTime}
-            </ProgramText>
-          </ProgramStack>
-        </ProgramFlex>
-      </ProgramContent>
-    </ProgramBox>
+            </ProgramText> */}
+          </View>
+        </View>
+      </View>
+    </View>
   );
 }

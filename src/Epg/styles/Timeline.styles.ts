@@ -11,7 +11,6 @@ export const TimelineTime = styled.Text<{
   isRTL?: boolean;
 }>`
   color: ${({ theme }) => theme.text.grey[300]};
-  position: absolute;
   top: 18px;
   left: ${({ isRTL, isBaseTimeFormat }) =>
     isRTL && isBaseTimeFormat ? "-32" : "-18"}px;
@@ -41,7 +40,11 @@ export const TimelineWrapper = styled.View<{
   theme?: Theme;
 }>`
   top: 0;
-  left: ${({ isSidebar, sidebarWidth }) => (isSidebar ? sidebarWidth : 0)};
+  left: ${({ isSidebar, sidebarWidth }) => {
+    console.log("ITEM_HEIGHT");
+
+    return (isSidebar ? sidebarWidth : 0)
+  }};
   display: flex;
   height: ${ITEM_HEIGHT - 20};
   width: ${({ dayWidth }) => dayWidth};

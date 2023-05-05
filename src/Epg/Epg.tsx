@@ -12,6 +12,7 @@ import { EpgStyled } from "./styles";
 
 // Import components
 import { Loader } from "./components";
+import { View } from "react-native";
 
 interface EpgProps {
   width?: number;
@@ -49,14 +50,22 @@ export const Epg = React.forwardRef<any, EpgProps>(
   ) => {
     const renderLoader = () => LoaderComponent ?? <Loader />;
     const epgGlobalStyles = customGlobalStyles ?? {};
+    console.log("height", height);
+    console.log("TIMELINE_HEIGHT", TIMELINE_HEIGHT);
+
     return (
       <ThemeProvider theme={theme}>
-        <Container
+        <View
           data-testid="container"
-          width={width}
-          height={height}
           ref={containerRef}
           {...rest}
+          style={{
+            padding: 5,
+            height: 1000,
+            width: 1000,
+            backgroundColor: "gray",
+            overflow: "scroll"
+          }}
         >
           <Wrapper>
             {isSidebar && isTimeline && (
@@ -71,8 +80,39 @@ export const Epg = React.forwardRef<any, EpgProps>(
             {/* {renderLoader()} */}
             {children}
           </Wrapper>
-        </Container>
+        </View>
       </ThemeProvider>
+
+      // <View data-testid="container" style={{
+      //   padding: 5,
+      //   height: "100%",
+      //   width: "100%",
+      //   backgroundColor: "gray"
+      // }} ref={containerRef}>
+      //   <View
+      //     style={{
+      //       height: "100%",
+      //       width: "100%",
+      //       display: "flex",
+      //       flexDirection: "column",
+      //       position: "relative",
+      //       borderRadius: 6,
+      //       overflow: "hidden"
+      //     }}
+
+      //   >
+      //     <View style={{
+      //       position: "absolute",
+      //       height: 1000,
+      //       width: 1200,
+      //       top: 0,
+      //       backgroundColor: "green",
+      //       zIndex: 100,
+      //       overflow: "scroll",
+      //     }}
+      //     />
+      //   </View>
+      // </View>
     );
   }
 );

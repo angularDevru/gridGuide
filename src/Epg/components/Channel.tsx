@@ -5,6 +5,7 @@ import { ChannelWithPosition } from "../helpers/types";
 
 // Import styles
 import { ChannelStyled } from "../styles";
+import { View, Image } from "react-native";
 
 interface ChannelProps<T> {
   channel: T;
@@ -19,16 +20,27 @@ export function Channel<T extends ChannelWithPosition>({
   ...rest
 }: ChannelProps<T>) {
   const { position, logo } = channel;
-  console.log(position);
+  console.log("logo", logo);
 
   return (
-    <ChannelBox
+    <View
       data-testid="sidebar-item"
-      onPress={() => onClick?.(channel)}
-      {...{ left: 40, ...position }}
-      {...rest}
+      style={{
+        height: 80,
+        width: 100,
+        left: 0,
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "#171923",
+        borderBottomColor: "white",
+        borderBottomWidth: 1,
+      }}
     >
-      <ChannelLogo source={{ uri: logo }} alt="Logo" />
-    </ChannelBox>
+      <Image source={{ uri: logo }} alt="Logo" style={{
+        height: 50,
+        width: 50,
+        position: "relative"
+      }} />
+    </View>
   );
 }
