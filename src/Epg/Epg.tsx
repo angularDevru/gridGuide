@@ -50,38 +50,43 @@ export const Epg = React.forwardRef<any, EpgProps>(
   ) => {
     const renderLoader = () => LoaderComponent ?? <Loader />;
     const epgGlobalStyles = customGlobalStyles ?? {};
-    console.log("height", height);
-    console.log("TIMELINE_HEIGHT", TIMELINE_HEIGHT);
-
     return (
-      <ThemeProvider theme={theme}>
+      // <ThemeProvider theme={theme}>
+      <View
+        data-testid="container"
+        ref={containerRef}
+        {...rest}
+        style={{
+          padding: 5,
+          overflow: "scroll"
+        }}
+      >
         <View
-          data-testid="container"
-          ref={containerRef}
-          {...rest}
           style={{
-            padding: 5,
-            height: 1000,
-            width: 1000,
-            backgroundColor: "gray",
-            overflow: "scroll"
-          }}
-        >
-          <Wrapper>
-            {isSidebar && isTimeline && (
-              <Box
-                isRTL={isRTL}
-                width={sidebarWidth}
-                height={TIMELINE_HEIGHT}
-                left={0}
-                top={0}
-              />
-            )}
-            {/* {renderLoader()} */}
-            {children}
-          </Wrapper>
+            height: "100%",
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            position: "relative",
+            borderRadius: 6,
+            overflow: "hidden"
+          }}>
+          {isSidebar && isTimeline && (
+            <View
+              style={{
+                position: "absolute",
+                height: TIMELINE_HEIGHT,
+                width: sidebarWidth,
+                top: 0,
+                backgroundColor: "#171923"
+              }}
+            />
+          )}
+          {/* {renderLoader()} */}
+          {children}
         </View>
-      </ThemeProvider>
+      </View>
+      // </ThemeProvider>
 
       // <View data-testid="container" style={{
       //   padding: 5,

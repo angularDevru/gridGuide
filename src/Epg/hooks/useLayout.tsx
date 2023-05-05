@@ -55,7 +55,13 @@ export function useLayout({
 
   const handleOnScroll = React.useCallback(
     (e: any) => {
-      handleScrollDebounced({ y: e.target.scrollTop, x: e.target.scrollLeft });
+
+      const nativeEvent = e.nativeEvent;
+      const { contentOffset } = nativeEvent;
+      // console.log("scrolling event", e);
+      const { x, y } = contentOffset;
+
+      handleScrollDebounced({ y, x });
     },
     [handleScrollDebounced]
   );

@@ -95,10 +95,8 @@ export const Layout = React.forwardRef<any, LayoutProps>(
 
     const renderPrograms = (program: ProgramWithPosition) => {
       const { position } = program;
-      // const isVisible = isProgramVisible(position);
-      const isVisible = true;
-
-      console.log("isVisible", isVisible);
+      const isVisible = isProgramVisible(position);
+      // const isVisible = true;
 
       if (isVisible) {
         const options = getProgramOptions(program);
@@ -134,8 +132,6 @@ export const Layout = React.forwardRef<any, LayoutProps>(
         isBaseTimeFormat,
         hourWidth,
       };
-      console.log("renderTimeline", renderTimeline);
-
       if (renderTimeline) {
         return renderTimeline({ ...timeProps, ...props });
       }
@@ -146,46 +142,57 @@ export const Layout = React.forwardRef<any, LayoutProps>(
       <ScrollView
         ref={scrollBoxRef}
         onScroll={onScroll as any}
-        horizontal={false}
-      // contentContainerStyle={{ height: 10000 }}
+      // horizontal={true}
       >
-        {(
-          <Line
-            dayWidth={dayWidth}
-            hourWidth={hourWidth}
-            sidebarWidth={sidebarWidth}
-            startDate={startDate}
-            endDate={endDate}
-            height={contentHeight}
-          />
-        )}
-        {isTimeline && renderTopbar()}
-        {isSidebar && (
-          <Channels
-            isRTL={isRTL}
-            isTimeline={isTimeline}
-            isChannelVisible={isChannelVisible}
-            sidebarWidth={sidebarWidth}
-            channels={channels as ChannelWithPosition[]}
-            scrollY={scrollY}
-            renderChannel={renderChannel}
-          />
-        )}
-        <View
-          data-testid="content"
-          style={{
-            backgroundColor: "#171923",
-            height: contentHeight,
-            width: dayWidth,
-            position: "absolute",
-            left: sidebarWidth,
-            top: 60
-          }}
+        <ScrollView
+          horizontal={true}
+          onScroll={onScroll as any}
+
         >
-          {programs.map((program) =>
-            renderPrograms(program as ProgramWithPosition)
-          )}
-        </View>
+          <View style={{
+            height: 8300,
+            width: 7400,
+            overflow: "scroll"
+          }}>
+            <Line
+              dayWidth={dayWidth}
+              hourWidth={hourWidth}
+              sidebarWidth={sidebarWidth}
+              startDate={startDate}
+              endDate={endDate}
+              height={contentHeight}
+            />
+            <View style={{ position: "absolute", top: 0 }}>
+              {isTimeline && renderTopbar()}
+            </View>
+            {isSidebar && (
+              <Channels
+                isRTL={isRTL}
+                isTimeline={isTimeline}
+                isChannelVisible={isChannelVisible}
+                sidebarWidth={sidebarWidth}
+                channels={channels as ChannelWithPosition[]}
+                scrollY={scrollY}
+                renderChannel={renderChannel}
+              />
+            )}
+            <View
+              data-testid="content"
+              style={{
+                backgroundColor: "#171923",
+                height: contentHeight,
+                width: dayWidth,
+                position: "absolute",
+                left: sidebarWidth,
+                top: 60
+              }}
+            >
+              {programs.map((program) =>
+                renderPrograms(program as ProgramWithPosition)
+              )}
+            </View>
+          </View>
+        </ScrollView>
       </ScrollView>
     );
   }

@@ -41,8 +41,6 @@ export const TimelineWrapper = styled.View<{
 }>`
   top: 0;
   left: ${({ isSidebar, sidebarWidth }) => {
-    console.log("ITEM_HEIGHT");
-
     return (isSidebar ? sidebarWidth : 0)
   }};
   display: flex;

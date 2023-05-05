@@ -23,15 +23,10 @@ const { Box } = ChannelsStyled;
 
 export function Channels(props: ChannelsProps) {
   const { channels, scrollY, sidebarWidth, renderChannel } = props;
-  console.log("channels", channels);
-
   const { isRTL, isTimeline, isChannelVisible } = props;
 
   const renderChannels = (channel: ChannelWithPosition) => {
     const isVisible = isChannelVisible(channel.position);
-    console.log(isVisible);
-    console.log(renderChannel);
-
     if (isVisible) {
       if (renderChannel) return renderChannel({ channel });
       return <Channel key={channel.uuid} channel={channel} />;

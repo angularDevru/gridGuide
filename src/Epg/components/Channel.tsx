@@ -20,8 +20,6 @@ export function Channel<T extends ChannelWithPosition>({
   ...rest
 }: ChannelProps<T>) {
   const { position, logo } = channel;
-  console.log("logo", logo);
-
   return (
     <View
       data-testid="sidebar-item"

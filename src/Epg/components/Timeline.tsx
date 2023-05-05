@@ -46,23 +46,8 @@ export function Timeline({
     numberOfHoursInDay,
     isBaseTimeFormat
   );
-  console.log(isRTL);
-  console.log(isBaseTimeFormat);
-  console.log(isSidebar);
-  console.log(dayWidth);
-  console.log(hourWidth);
-  console.log(numberOfHoursInDay);
-  console.log(sidebarWidth);
-
-
-
-
-
-
 
   const renderTime = (index: number) => {
-    console.log(formatTime(index + offsetStartHoursRange));
-
 
     return (
       <View data-testid="timeline-item" key={index} style={{
@@ -79,23 +64,33 @@ export function Timeline({
         >
           {formatTime(index + offsetStartHoursRange)}
         </Text>
-        <TimelineDividers>{renderDividers()}</TimelineDividers>
+        <View style={{
+          height: "100%",
+          width: "100%",
+          alignItems: "center",
+          paddingBottom: 6
+        }}>{renderDividers()}</View>
       </View>
     )
   };
 
   const renderDividers = () =>
     dividers.map((_, index) => (
-      <TimelineDivider key={index} width={hourWidth} />
+      <View
+        key={index}
+        style={{
+          backgroundColor: "gray",
+          height: 10,
+          width: 1,
+          marginRight: hourWidth / 4
+        }}
+      />
     ));
-
-  console.log("time", time);
 
   return (
     <View
       data-testid="timeline"
       style={{
-        top: 0,
         left: sidebarWidth,
         display: "flex",
         height: ITEM_HEIGHT - 20,
